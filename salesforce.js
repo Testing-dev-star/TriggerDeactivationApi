@@ -11,7 +11,13 @@ async function authenticateWithSalesforce({ clientId, clientSecret, username, pa
       loginUrl
     }
   });
-
+  
+conn.login(req.body.username, req.body.password, (err, userInfo) => {
+  if (err) {
+    console.error("Salesforce login failed:", err);
+    return res.status(500).json({ error: "Salesforce authentication failed", details: err });
+  }
+}
   await conn.login(username, password);
   return conn;
 }
