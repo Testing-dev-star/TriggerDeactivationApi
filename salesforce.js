@@ -11,27 +11,29 @@ async function authenticateWithSalesforce({ clientId, clientSecret, username, pa
       loginUrl
     }
   });
-  
-conn.login(req.body.username, req.body.password, (err, userInfo) => {
-  if (err) {
-    console.error("Salesforce login failed:", err);
-    return res.status(500).json({ error: "Salesforce authentication failed", details: err });
+
+  try {
+    await conn.login(username, password);
+    return conn;
+  } catch (err) {
+    console.error('Salesforce login failed:', err);
+    throw new Error('Salesforce authentication failed');
   }
-}
-  await conn.login(username, password);
-  return conn;
 }
 
 async function deployTriggerToggle(conn, triggerName, enable) {
   const metadata = [{
     fullName: triggerName,
-    metadata: {
-      status: enable ? 'Active' : 'Inactive'
-    }
+    status: enable ? 'Active' : 'Inactive'
   }];
 
-  const deployResult = await conn.metadata.update('ApexTrigger', metadata);
-  return deployResult;
+  try {
+    const result = await conn.metadata.update('ApexTrigger', metadata);
+    return result;
+  } catch (err) {
+    console.error('Metadata update failed:', err);
+    throw new Error('Failed to update trigger status');
+  }
 }
 
 module.exports = {
