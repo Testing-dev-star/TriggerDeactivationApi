@@ -1,0 +1,15 @@
+{
+  "name": "trigger-toggle-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsforce": "^2.0.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "xml2js": "^0.4.23"
+  }
+}
