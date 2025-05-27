@@ -33,9 +33,7 @@ async function deployTriggerToggle(conn, triggerName, enable) {
     const result = await conn.metadata.update('ApexTrigger', metadata);
     return result;
   } catch (err) {
-    console.error('Metadata update failed:', err);
-     console.error('Metadata conn conn:', conn);
-      console.error('Metadata metadata :', metadata);
+    console.error('Metadata update failed:', err, conn, metadata);
     throw new Error('Failed to Update trigger status : ', err);
   }
 }
