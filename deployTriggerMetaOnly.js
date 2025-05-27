@@ -34,3 +34,5 @@ throw new Error(Deployment failed: ${JSON.stringify(errorDetails, null, 2)});
 
 return result;
 }
+
+module.exports = { deployTriggerMetadataOnly };
