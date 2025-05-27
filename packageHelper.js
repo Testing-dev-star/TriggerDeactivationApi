@@ -11,7 +11,7 @@ async function generatePackageXML(triggerName) {
         name: 'ApexTrigger',
         members: [triggerName]
       }],
-      version: ['58.0']
+      version: ['62.0']
     }
   };
   return builder.buildObject(packageObj);
