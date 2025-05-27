@@ -34,6 +34,8 @@ async function deployTriggerToggle(conn, triggerName, enable) {
     return result;
   } catch (err) {
     console.error('Metadata update failed:', err);
+     console.error('Metadata conn conn:', conn);
+      console.error('Metadata metadata :', metadata);
     throw new Error('Failed to update trigger status', err);
   }
 }
