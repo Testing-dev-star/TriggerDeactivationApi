@@ -16,7 +16,7 @@ const triggerMeta = buildTriggerMetaXml(apiVersion, status);
 const packageXml = buildPackageXml(triggerName, apiVersion);
 
 folder.file(${triggerName}.trigger-meta.xml, triggerMeta);
-folder.file(package.xml, packageXml);
+folder.file('package.xml', packageXml);
 
 return await zip.generateAsync({ type: 'nodebuffer' });
 }
@@ -24,6 +24,7 @@ return await zip.generateAsync({ type: 'nodebuffer' });
 async function deployTriggerMetadataOnly(conn, triggerName, apiVersion, enable) {
 const status = enable ? 'Active' : 'Inactive';
 const zipBuffer = await buildDeploymentZip(triggerName, apiVersion, status);
+
 const result = await conn.metadata.deploy(zipBuffer, { singlePackage: true }).complete({ details: true });
 
 if (!result.success) {
