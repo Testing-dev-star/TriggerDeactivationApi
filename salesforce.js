@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { generatePackageXML } = require('./packageHelper');
 
-async function authenticateWithSalesforce({ clientId, clientSecret, username, password, loginUrl = 'https://login.salesforce.com' }) {
+async function authenticateWithSalesforce({ clientId, clientSecret, username, password, loginUrl = 'https://test.salesforce.com' }) {
   const conn = new jsforce.Connection({
     oauth2: {
       clientId,
